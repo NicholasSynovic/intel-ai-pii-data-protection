@@ -14,7 +14,6 @@ else
     echo "File created"
 fi
 ## Clone the Name Generator Repository
-cd src
 echo "> Cloning the Repository..."
 git clone https://github.com/chaitanyarahalkar/Name-Generator-RNN
 cd Name-Generator-RNN/
