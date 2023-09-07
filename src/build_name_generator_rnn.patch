@@ -5,7 +5,7 @@
 
  # %%
 -def model(data, ix_to_char, char_to_ix, num_iterations = 55000, n_a = 25, names = 10, vocab_size = 27):
-+def model(data, ix_to_char, char_to_ix, num_iterations = 850000, n_a = 25, names = 10, vocab_size = 27):
++def model(data, ix_to_char, char_to_ix, num_iterations = 85000, n_a = 25, names = 10, vocab_size = 27):
      """
      Trains the model and generates names.
 
