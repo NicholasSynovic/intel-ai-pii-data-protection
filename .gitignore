@@ -139,3 +139,4 @@ tensorboard/
 data/
 *.csv
 *.zip
+!data/run.bash
