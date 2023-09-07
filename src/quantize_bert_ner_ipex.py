@@ -15,14 +15,13 @@ import argparse
 import pathlib
 import random
 import warnings
+
 warnings.filterwarnings("ignore")
 import intel_extension_for_pytorch as ipex
-from intel_extension_for_pytorch.quantization import prepare, convert
 import torch
-from transformers import (
-    AutoTokenizer,
-    AutoModelForTokenClassification
-)
+from intel_extension_for_pytorch.quantization import convert, prepare
+from transformers import AutoModelForTokenClassification, AutoTokenizer
+
 
 def main(flags):
     """Run quantization and save the model using IPEX.
@@ -35,51 +34,49 @@ def main(flags):
     model.eval()
 
     sample_inputs = [
-        random.sample(
-            range(tokenizer.vocab_size),
-            model.config.max_position_embeddings)]
+        random.sample(range(tokenizer.vocab_size), model.config.max_position_embeddings)
+    ]
     sample_inputs = tokenizer.batch_decode(sample_inputs)
     sample_inputs = tokenizer(
         sample_inputs[0],
         padding=True,
         max_length=model.config.max_position_embeddings,
-        truncation=True
+        truncation=True,
     )
 
     # INT-8 Dynamic Quantization of Model using IPEX
     qconfig = ipex.quantization.default_dynamic_qconfig
     prepared_model = prepare(
-        model, qconfig,
-        example_inputs=(
-            sample_inputs['input_ids'],
-            sample_inputs['attention_mask']),
-        inplace=False)
+        model,
+        qconfig,
+        example_inputs=(sample_inputs["input_ids"], sample_inputs["attention_mask"]),
+        inplace=False,
+    )
 
     converted_model = convert(prepared_model)
 
     path = pathlib.Path(flags.save_model_dir)
     path.mkdir(parents=True, exist_ok=True)
-    torch.save(
-        converted_model,
-        path / "saved_model_bert_base_ner.pt")
+    torch.save(converted_model, path / "saved_model_bert_base_ner.pt")
     tokenizer.save_pretrained(path)
     print("Model has been quantized .... & saved in pt format")
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--model',
-                        type=str,
-                        required=True,
-                        help="Pretrained BERT based NER model to use"
-                        )
+    parser.add_argument(
+        "--model",
+        type=str,
+        required=True,
+        help="Pretrained BERT based NER model to use",
+    )
 
-    parser.add_argument('--save_model_dir',
-                        type=str,
-                        required=True,
-                        help="directory to save the quantized model to")
+    parser.add_argument(
+        "--save_model_dir",
+        type=str,
+        required=True,
+        help="directory to save the quantized model to",
+    )
     flags = parser.parse_args()
     main(flags)
-    

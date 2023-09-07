@@ -6,7 +6,7 @@
 
 echo "checking model directory path to save the model"
 DIR="model"
-if [ -d "$DIR" ]; 
+if [ -d "$DIR" ];
 then
     echo "Directory exist ,script is getting executed ..."
 else
@@ -38,4 +38,3 @@ cp ./name_generator.pkl ../../model
 
 cd ../
 echo "> Script Execution COMPLETED"
-

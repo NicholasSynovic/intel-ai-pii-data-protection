@@ -7,46 +7,46 @@
     {
       "column": "passport_number",
       "type": "numeric",
-      "len": 10 
+      "len": 10
     },
     {
       "column": "location",
       "type": "string",
-      "len": 10 
+      "len": 10
     },
 
     {
       "column": "Name",
       "type": "name",
-      "len": 10 
+      "len": 10
     },
 
     {
       "column": "phone_number",
       "type": "phone",
-      "len": 10, 
-      "prefix": "+91" 
+      "len": 10,
+      "prefix": "+91"
     },
     {
       "column": "ip_address",
       "type": "ip_address"
     },
-   
+
     {
       "column": "Email",
       "type": "email_address"
     },
     {
       "column": "invoice_number",
-      "type": "alphanumeric", 
+      "type": "alphanumeric",
       "len": 20
     },
     {
       "column": "credit_card_number",
       "type": "maskdigit",
-      "start": 3, 
-      "end": 8, 
-      "char": "X" 
+      "start": 3,
+      "end": 8,
+      "char": "X"
     },
     {
       "column": "social_security_number",
@@ -63,11 +63,11 @@
       "type": "encrypt",
       "index_number":2
     },
-     
+
     {
       "column": "description",
       "type": "text"
-      
+
     }
   ]
 }
