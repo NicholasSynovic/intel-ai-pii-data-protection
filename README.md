@@ -1,5 +1,9 @@
 # Personal Identifiable Information (PII) Anonymization Reference Kit
 
+## NOTE
+
+Move [`getData.bash`](getData.bash) to the `data` directory prior to running it.
+
 ## Introduction
 
 Personal Identifiable Information (PII) is sensitive information that can be
